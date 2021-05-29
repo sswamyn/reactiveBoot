@@ -20,9 +20,8 @@ public class Agent {
     private int creditLimit;
 
     public Agent(){}
-    public Agent(String networkID, String agtType, String agtStatus, int commissionLevel, int creditLimit) {
-        //this.id = id;
-        super();
+    public Agent(long id, String networkID, String agtType, String agtStatus, int commissionLevel, int creditLimit) {
+        this.id = id;
         this.networkID = networkID;
         this.agtType = agtType;
         this.agtStatus = agtStatus;
@@ -77,5 +76,4 @@ public class Agent {
     public void setCreditLimit(int creditLimit) {
         this.creditLimit = creditLimit;
     }
-
 }
