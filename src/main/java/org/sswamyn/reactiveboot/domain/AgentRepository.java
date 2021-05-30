@@ -18,10 +18,13 @@ public interface AgentRepository extends CrudRepository<Agent, Long> {
 
     // Find NAID that are Open
     List<Agent> findByNetworkIDAndAgtStatus(String NAID, String status);
-/*
+
     // Let us go straight to a good old SQL query
-    @Query("select agt from Agent where creditLimit > ?1")
+    @Query("select agt from Agent agt where agt.creditLimit > ?1")
     List<Agent> findByCreditLimitGreaterThan(int creditLimit);
-*/
+
+    // SQL query with sring search
+    @Query("select agt from Agent agt where agt.networkID LIKE ?1%")
+    List<Agent> findNetworkIDStartsWith(String naidBegin);
 
 }
