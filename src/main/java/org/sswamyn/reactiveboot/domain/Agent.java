@@ -7,6 +7,7 @@ public class Agent {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
+
     @Column(name="networkID", nullable=false, length=20)
     private String networkID;
     @Column(name="agtType", nullable=false, length=20)
@@ -15,13 +16,13 @@ public class Agent {
     private String agtStatus;
     @Column(name="commissionLevel")
     private int commissionLevel;
-
-
+    @Column(name="creditLimit")
     private int creditLimit;
 
     public Agent(){}
-    public Agent(long id, String networkID, String agtType, String agtStatus, int commissionLevel, int creditLimit) {
-        this.id = id;
+    //public Agent(long id, String networkID, String agtType, String agtStatus, int commissionLevel, int creditLimit) {
+    public Agent(String networkID, String agtType, String agtStatus, int commissionLevel, int creditLimit) {
+        super();
         this.networkID = networkID;
         this.agtType = agtType;
         this.agtStatus = agtStatus;

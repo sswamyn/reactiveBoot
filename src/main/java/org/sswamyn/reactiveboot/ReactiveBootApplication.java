@@ -2,8 +2,13 @@ package org.sswamyn.reactiveboot;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.sswamyn.reactiveboot.domain.Agent;
+import org.sswamyn.reactiveboot.domain.AgentRepository;
 
 
 // ******* @SpringBootApplication - is a combination of these three annotations ********
@@ -16,6 +21,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class ReactiveBootApplication {
+    @Autowired
+    private AgentRepository repo;
 
     private static final Logger logger = LoggerFactory.getLogger(ReactiveBootApplication.class);
 
@@ -23,4 +30,13 @@ public class ReactiveBootApplication {
         SpringApplication.run(ReactiveBootApplication.class, args);
     }
 
+    @Bean
+    CommandLineRunner runner() {
+        return args -> {
+            // networkID varchar-20; agtType varchar-20; agtStatus varchar-4; commissioinLevel int; creditLimit int
+            repo.save(new Agent("Network ID like NAID", "Retail Digital", "OCSP", 10, 2000));
+            repo.save(new Agent("ABC123456", "Retail", "O", 10, 10000));
+            repo.save(new Agent("PQR88448822", "Digital", "O", 20, 20000));
+        };
+    }
 }
