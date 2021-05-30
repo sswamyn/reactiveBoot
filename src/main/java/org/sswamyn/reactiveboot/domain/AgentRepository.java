@@ -14,11 +14,11 @@ public interface AgentRepository extends CrudRepository<Agent, Long> {
 
     // Find by Agent Status
     List<Agent> findByAgtStatus(String status);
-/*
+
 
     // Find NAID that are Open
     List<Agent> findByNetworkIDAndAgtStatus(String NAID, String status);
-
+/*
     // Let us go straight to a good old SQL query
     @Query("select agt from Agent where creditLimit > ?1")
     List<Agent> findByCreditLimitGreaterThan(int creditLimit);
