@@ -1,9 +1,6 @@
 package org.sswamyn.reactiveboot.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class AgtAddress {
@@ -11,6 +8,21 @@ public class AgtAddress {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long addressId;
     private String addressLine1, addressLine2, addressLine3, addressCity, addressProvince, addressCountry, addressPostalcode;
+
+    //One AgentID(NAID) can have many addresses
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "agent")
+    private Agent agent;
+
+    public Agent getAgent() {
+        return agent;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
+
+    ////////////// constrators
     public AgtAddress() {}
 
     public long getAddressId() {
@@ -78,7 +90,7 @@ public class AgtAddress {
     }
 
     public AgtAddress(String addressLine1, String addressLine2, String addressLine3, String addressCity,
-                      String addressProvince, String addressCountry, String addressPostalcode){
+                      String addressProvince, String addressCountry, String addressPostalcode, Agent agent){
         super();
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
@@ -87,6 +99,7 @@ public class AgtAddress {
         this.addressProvince = addressProvince;
         this.addressCountry = addressCountry;
         this.addressPostalcode = addressPostalcode;
+        this.agent = agent;
     }
 
 

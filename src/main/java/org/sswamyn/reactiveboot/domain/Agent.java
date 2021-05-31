@@ -1,6 +1,9 @@
 package org.sswamyn.reactiveboot.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Agent {
@@ -19,6 +22,19 @@ public class Agent {
     @Column(name="creditLimit")
     private int creditLimit;
 
+    //Forgien key relationship
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="agent")
+    @JsonIgnore
+    private List<AgtAddress> agtAddress;
+
+    public List<AgtAddress> getAgtAddressList() {
+        return agtAddress;
+    }
+
+    public void setAgtAddressList(List<AgtAddress> agtAddress) {
+        this.agtAddress = agtAddress;
+    }
+    // Construtors
     public Agent(){}
     //public Agent(long id, String networkID, String agtType, String agtStatus, int commissionLevel, int creditLimit) {
     public Agent(String networkID, String agtType, String agtStatus, int commissionLevel, int creditLimit) {
